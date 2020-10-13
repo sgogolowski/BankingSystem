@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="112.0" layoutY="446.0" prefHeight="17.0" prefWidth="227.0" text="2020 © Szymon Gogolowski, Julio Collado" textAlignment="CENTER" />
+            <Label layoutX="57.0" layoutY="54.0" text="Welcome to Transaction Manager!">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="131.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/opening-bank-account.jpg" />
+               </image>
+            </ImageView>
+            <Button layoutX="172.0" layoutY="395.0" mnemonicParsing="false" onAction="#importDB" text="Import Database" />
+            <HBox layoutX="129.0" layoutY="284.0" prefHeight="110.0" prefWidth="201.0" spacing="10.0">
+               <children>
+                  <ComboBox fx:id="commandComboBox" prefHeight="25.0" prefWidth="158.0" promptText="Select a command!" />
+                  <Button mnemonicParsing="false" onAction="#showCommand" prefHeight="25.0" prefWidth="38.0" text="Go!" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

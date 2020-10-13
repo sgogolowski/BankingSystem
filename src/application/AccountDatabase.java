@@ -198,20 +198,22 @@ public class AccountDatabase {
 	 * Method to print statements by date open.
 	 * Includes: interest, fees, and new balance.
 	 */
-	public void printByDateOpen() {
-		System.out.printf("\n--Printing statements by date opened--\n");
+	public String printByDateOpen() {
+		String output;
+		output = String.format("\n--Printing statements by date opened--\n");
 		if (this.size >= 2)
 			sortByDateOpen();
 		for (int i = 0; i < this.size; i ++) {
-			System.out.printf("\n" + accounts[i]);
+			output += ("\n" + accounts[i]);
 			double interest = accounts[i].monthlyInterest();
 			double fee = accounts[i].monthlyFee();
 			accounts[i].debit(fee);
 			accounts[i].credit(interest);
-			System.out.printf("\n-interest: $ %,.2f\n-fee: $ %,.2f\n-new balance: $ %,.2f\n",
+			output += String.format("\n-interest: $ %,.2f\n-fee: $ %,.2f\n-new balance: $ %,.2f\n",
 					interest, fee, accounts[i].getBalance());
 		}
-		System.out.printf("--end of printing--\n");
+		output += ("--end of printing--\n");
+		return output;
 		
 	}
 	
@@ -219,32 +221,35 @@ public class AccountDatabase {
 	 * Method to print statements by last name.
 	 * Includes: interest, fees, and new balance.
 	 */
-	public void printByLastName() {
-		System.out.printf("\n--Printing statements by last name--\n");
+	public String printByLastName() {
+		String output;
+		output = String.format("\n--Printing statements by last name--\n");
 		if (this.size >= 2)
 			sortByLastName();
 		for (int i = 0; i < this.size; i ++) {
-			System.out.printf("\n" + accounts[i]);
+			output += ("\n" + accounts[i]);
 			double interest = accounts[i].monthlyInterest();
 			double fee = accounts[i].monthlyFee();
 			accounts[i].debit(fee);
 			accounts[i].credit(interest);
-			System.out.printf("\n-interest: $ %,.2f\n-fee: $ %,.2f\n-new balance: $ %,.2f\n",
+			output += String.format("\n-interest: $ %,.2f\n-fee: $ %,.2f\n-new balance: $ %,.2f\n",
 					interest, fee, accounts[i].getBalance());
 		}
-		System.out.printf("--end of printing--\n");
+		output += ("--end of printing--\n");
+		return output;
 		
 	}
 	
 	/**
 	 * Method to print the list of accounts.
 	 */
-	public void printAccounts() {
-		System.out.println("--Listing accounts in the database--");
+	public String printAccounts() {
+		String output;
+		output = ("--Listing accounts in the database--");
 		for (int i = 0; i < this.size; i ++) {
-			System.out.println(accounts[i]);
+			output += ("\n" + accounts[i]);
 		}
-		System.out.println("--end of listing--");
-		
+		output += ("\n--end of listing--");
+		return output;
 	}
 }
