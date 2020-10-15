@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -11,6 +12,11 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fitHeight="500.0" fitWidth="450.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../img/background.png" />
+               </image>
+            </ImageView>
             <VBox layoutX="130.0" layoutY="64.0" prefHeight="242.0" prefWidth="182.0" spacing="10.0">
                <children>
                   <Label prefHeight="29.0" prefWidth="220.0" text="Close An Account" textAlignment="CENTER">

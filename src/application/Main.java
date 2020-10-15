@@ -13,7 +13,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			//AccountDatabase db = new AccountDatabase();
 			BorderPane root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 			Scene scene = new Scene(root, 450, 500);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

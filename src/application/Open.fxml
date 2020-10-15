@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -10,6 +11,11 @@
    <center>
       <Pane prefHeight="484.0" prefWidth="452.0" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fitHeight="500.0" fitWidth="450.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../img/background.png" />
+               </image>
+            </ImageView>
             <VBox alignment="TOP_RIGHT" layoutX="31.0" layoutY="59.0" prefHeight="200.0" prefWidth="100.0" spacing="18.0">
                <children>
                   <Label text="First Name" textAlignment="RIGHT">
