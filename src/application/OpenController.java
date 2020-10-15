@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -168,7 +167,7 @@ public class OpenController extends Main{
     	}
     	catch (InputMismatchException ime) {
     		Alert alert = new Alert(AlertType.ERROR);
-    		alert.setTitle("Input mismatch");
+    		alert.setTitle("Input mismatch, try again.");
 	    	alert.setContentText(ime.getMessage());
 	    	alert.showAndWait();
 	    	Parent open = FXMLLoader.load(getClass().getResource("Open.fxml"));
@@ -180,7 +179,7 @@ public class OpenController extends Main{
     	catch (NullPointerException npe) {
     		Alert alert = new Alert(AlertType.ERROR);
     		alert.setTitle("Input mismatch");
-	    	alert.setContentText("Invalid input");
+	    	alert.setContentText("Invalid input, try again.");
 	    	alert.showAndWait();
 	    	Parent open = FXMLLoader.load(getClass().getResource("Open.fxml"));
 	    	Scene openPage = new Scene(open);

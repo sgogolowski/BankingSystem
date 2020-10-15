@@ -28,8 +28,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ButtonBar.ButtonData;
 
 public class HomeController extends Main implements Initializable {
@@ -124,8 +122,12 @@ public class HomeController extends Main implements Initializable {
      * @param event being fired
      */
     @FXML
-    void showDeposit(ActionEvent event) {
-
+    void showDeposit(ActionEvent event) throws IOException{
+    	Parent open = FXMLLoader.load(getClass().getResource("Deposit.fxml"));
+    	Scene openPage = new Scene(open);
+    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	stage.setScene(openPage);
+    	stage.show();
     }
 
     /**
