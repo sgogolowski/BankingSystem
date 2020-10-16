@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
+  <tabs>
+    <Tab text="Open Account">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane layoutX="17.0" layoutY="11.0" orientation="VERTICAL" prefHeight="363.0" prefWidth="461.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="459.0">
+                           <children>
+                              <TextArea fx:id="openOutput" layoutX="13.0" layoutY="247.0" prefHeight="106.0" prefWidth="434.0" />
+                              <Pane layoutX="13.0" layoutY="7.0" prefHeight="227.0" prefWidth="434.0">
+                                 <children>
+                                    <VBox alignment="TOP_RIGHT" layoutX="7.0" prefHeight="222.0" prefWidth="80.0" spacing="18.0">
+                                       <children>
+                                          <Label text="First Name">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Last Name">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Balance">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Date Opened">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Account Type">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="94.0" layoutY="-1.0" prefHeight="223.0" prefWidth="147.0" spacing="10.0">
+                                       <children>
+                                          <TextField fx:id="fnameOpen" />
+                                          <TextField fx:id="lnameOpen" />
+                                          <TextField fx:id="balanceOpen" />
+                                          <HBox prefHeight="28.0" prefWidth="148.0" spacing="5.0">
+                                             <children>
+                                                <TextField fx:id="month" prefHeight="25.0" prefWidth="35.0" promptText="mm" />
+                                                <Label prefHeight="3.0" prefWidth="0.0" text="/">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="day" prefHeight="25.0" prefWidth="35.0" promptText="dd" />
+                                                <Label prefHeight="3.0" prefWidth="0.0" text="/">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="year" prefHeight="25.0" prefWidth="40.0" promptText="yyyy" />
+                                             </children>
+                                          </HBox>
+                                          <RadioButton fx:id="checkingRadioOpen" mnemonicParsing="false" onAction="#disableSM" text="Checking">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="AccountTypeOpen" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="savingsRadioOpen" mnemonicParsing="false" onAction="#disableCM" text="Savings" toggleGroup="$AccountTypeOpen" />
+                                          <RadioButton fx:id="moneymarketRadioOpen" mnemonicParsing="false" onAction="#disableCS" text="Money Market" toggleGroup="$AccountTypeOpen" />
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="273.0" layoutY="-1.0" prefHeight="116.0" prefWidth="147.0" spacing="10.0">
+                                       <children>
+                                          <CheckBox fx:id="DirectDepositCheckbox" mnemonicParsing="false" text="Direct Deposit" />
+                                          <CheckBox fx:id="LoyalCheckbox" mnemonicParsing="false" text="Loyal Customer" />
+                                          <TextField fx:id="Withdrawals" promptText="Withdrawals" />
+                                          <Button mnemonicParsing="false" onAction="#openAccount" text="Open Account" />
+                                       </children>
+                                    </VBox>
+                                    <ImageView fitHeight="86.0" fitWidth="131.0" layoutX="258.0" layoutY="127.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../../img/opening-bank-account.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Button layoutX="389.0" layoutY="213.0" mnemonicParsing="false" onAction="#clearOpen" prefHeight="0.0" prefWidth="45.0" text="Clear" />
+                                 </children>
+                              </Pane>
+                              <Label layoutX="13.0" layoutY="230.0" text="Output">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Close Account">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane layoutX="17.0" layoutY="11.0" orientation="VERTICAL" prefHeight="363.0" prefWidth="461.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="459.0">
+                           <children>
+                              <TextArea fx:id="closeOutput" layoutX="13.0" layoutY="247.0" prefHeight="106.0" prefWidth="434.0" />
+                              <Pane layoutX="13.0" layoutY="7.0" prefHeight="227.0" prefWidth="434.0">
+                                 <children>
+                                    <VBox alignment="TOP_RIGHT" layoutX="54.0" layoutY="1.0" prefHeight="222.0" prefWidth="80.0" spacing="18.0">
+                                       <children>
+                                          <Label text="First Name">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Last Name">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Account Type">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="144.0" prefHeight="215.0" prefWidth="147.0" spacing="10.0">
+                                       <children>
+                                          <TextField fx:id="fnameClose" />
+                                          <TextField fx:id="lnameClose" />
+                                          <RadioButton fx:id="checkingRadioClose" mnemonicParsing="false" text="Checking">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="AccountTypeClose" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="savingsRadioClose" mnemonicParsing="false" text="Savings" toggleGroup="$AccountTypeClose" />
+                                          <RadioButton fx:id="moneymarketRadioClose" mnemonicParsing="false" text="Money Market" toggleGroup="$AccountTypeClose" />
+                                          <Button mnemonicParsing="false" onAction="#closeAccount" text="Close Account" />
+                                       </children>
+                                    </VBox>
+                                    <ImageView fitHeight="86.0" fitWidth="131.0" layoutX="303.0" layoutY="71.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../../img/opening-bank-account.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Button layoutX="389.0" layoutY="211.0" mnemonicParsing="false" onAction="#clearClose" prefHeight="0.0" prefWidth="45.0" text="Clear" />
+                                 </children>
+                              </Pane>
+                              <Label layoutX="13.0" layoutY="230.0" text="Output">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Deposit/Withdraw">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane layoutX="17.0" layoutY="11.0" orientation="VERTICAL" prefHeight="363.0" prefWidth="461.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="459.0">
+                           <children>
+                              <TextArea fx:id="deposit_withdraw_output" layoutX="13.0" layoutY="247.0" prefHeight="106.0" prefWidth="434.0" />
+                              <Pane layoutX="13.0" layoutY="7.0" prefHeight="217.0" prefWidth="434.0">
+                                 <children>
+                                    <VBox alignment="TOP_RIGHT" layoutX="54.0" layoutY="1.0" prefHeight="222.0" prefWidth="80.0" spacing="18.0">
+                                       <children>
+                                          <Label text="First Name">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Last Name">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Amount">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Account Type">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="144.0" prefHeight="215.0" prefWidth="147.0" spacing="10.0">
+                                       <children>
+                                          <TextField fx:id="fnameDW" />
+                                          <TextField fx:id="lnameDW" />
+                                          <TextField fx:id="balanceDW" />
+                                          <RadioButton fx:id="checkingRadioDW" mnemonicParsing="false" text="Checking">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="AccountTypeDW" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="savingsRadioDW" mnemonicParsing="false" text="Savings" toggleGroup="$AccountTypeDW" />
+                                          <RadioButton fx:id="moneymarketRadioDW" mnemonicParsing="false" text="Money Market" toggleGroup="$AccountTypeDW" />
+                                          <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#deposit" text="Deposit" />
+                                                <Button mnemonicParsing="false" onAction="#withdraw" text="Withdraw" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <ImageView fitHeight="86.0" fitWidth="131.0" layoutX="303.0" layoutY="71.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../../img/opening-bank-account.jpg" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <Label layoutX="13.0" layoutY="230.0" text="Output">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="402.0" layoutY="218.0" mnemonicParsing="false" onAction="#clearDW" prefHeight="0.0" prefWidth="45.0" text="Clear" />
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Account Database">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane layoutX="17.0" layoutY="11.0" orientation="VERTICAL" prefHeight="363.0" prefWidth="461.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="459.0">
+                           <children>
+                              <TextArea fx:id="databaseOutput" layoutX="13.0" layoutY="132.0" prefHeight="221.0" prefWidth="434.0" />
+                              <Pane layoutX="13.0" layoutY="7.0" prefHeight="115.0" prefWidth="434.0">
+                                 <children>
+                                    <ImageView fitHeight="86.0" fitWidth="131.0" layoutX="289.0" layoutY="14.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../../img/opening-bank-account.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <HBox alignment="CENTER" layoutX="-5.0" layoutY="8.0" prefHeight="100.0" prefWidth="288.0" spacing="18.0">
+                                       <children>
+                                          <MenuButton fx:id="databaseMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Database">
+                                             <items>
+                                                <MenuItem fx:id="importMenu" mnemonicParsing="false" onAction="#importDB" text="Import" />
+                                                <MenuItem fx:id="exportMenu" mnemonicParsing="false" onAction="#exportDB" text="Export" />
+                                                <MenuItem fx:id="paMenu" mnemonicParsing="false" onAction="#printAccounts" text="Print Accounts" />
+                                             </items>
+                                          </MenuButton>
+                                          <MenuButton fx:id="statementsMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="144.0" text="Account Statements">
+                                            <items>
+                                              <MenuItem fx:id="pnMenu" mnemonicParsing="false" onAction="#showPN" text="Print by last name" />
+                                              <MenuItem fx:id="pdMenu" mnemonicParsing="false" onAction="#showPD" text="Print by date opened" />
+                                            </items>
+                                          </MenuButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
