@@ -37,6 +37,7 @@ public class Checking extends Account{
 	 * Method from Account class to retrieve the monthly interest rate
 	 * @return monthly interest rate
 	 */
+	@Override
 	public double monthlyInterest() {
 		return (this.getBalance() * ANNUAL_INTEREST_RATE) / 12;
 	}
@@ -45,6 +46,7 @@ public class Checking extends Account{
 	 * Method to retrieve the monthly fee depending on the account type
 	 * @return monthly fee
 	 */
+	@Override
 	public double monthlyFee() {
 		if (this.getBalance() >= WAIVE_AMOUNT || directDeposit)
 			return 0.0;

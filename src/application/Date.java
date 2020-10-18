@@ -5,7 +5,8 @@ package application;
  *  @authors Szymon Gogolowski, Julio Collado
  */
 public class Date implements Comparable<Date> {
-	
+	private final int JAN = 1, FEB = 2, MAR = 3, APR = 4, MAY = 5, JUN = 6, JUL = 7, AUG = 8, SEP = 9, OCT = 10, NOV = 11, DEC = 12;
+	private final int MAX_YEAR = 2020, MIN_YEAR = 1, MIN_DAY = 1, MAX_DAYS_1 = 31, MAX_DAYS_2 = 30, MAX_DAYS_LEAP_YEAR = 29, MAX_DAYS_FEB = 28;
 	private int year;
 	private int month;
 	private int day;
@@ -74,36 +75,36 @@ public class Date implements Comparable<Date> {
 	 * @return true if Date is valid, otherwise false
 	 */
 	public boolean isValid() {
-		if (this.month > 12 || this.month < 1)
+		if (this.month > DEC || this.month < JAN)
 			return false;
-		if (this.year > 2020 || this.year < 1)
+		if (this.year > MAX_YEAR || this.year < MIN_YEAR)
 			return  false;
-		if (this.day < 1)
+		if (this.day < MIN_DAY)
 			return false;
 		switch (this.month) {
-			case 1:
-			case 3:
-			case 5:
-			case 7:
-			case 8:
-			case 10:
-			case 12:
-				if (this.day > 31) 
+			case JAN:
+			case MAR:
+			case MAY:
+			case JUL:
+			case AUG:
+			case OCT:
+			case DEC:
+				if (this.day > MAX_DAYS_1) 
 					return false;
 				return true;
-			case 4: 
-			case 6:
-			case 9:
-			case 11:
-				if (this.day > 30)
+			case APR: 
+			case JUN:
+			case SEP:
+			case NOV:
+				if (this.day > MAX_DAYS_2)
 					return false;
-			case 2:
+			case FEB:
 				if (this.year % 4 == 0)
-					if (this.day > 29)
+					if (this.day > MAX_DAYS_LEAP_YEAR)
 						return false;
 					else
 						return true;
-				if (this.day > 28)
+				if (this.day > MAX_DAYS_FEB)
 					return false;
 				return true;
 			default: 

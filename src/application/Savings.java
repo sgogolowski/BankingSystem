@@ -37,6 +37,7 @@ public class Savings extends Account {
 	 * Method from Account class to retrieve the monthly interest rate
 	 * @return monthly interest rate
 	 */
+	@Override
 	public double monthlyInterest() {
 		if (isLoyal) {
 			return (this.getBalance() * PROMO_INTEREST_RATE) / 12;
@@ -49,6 +50,7 @@ public class Savings extends Account {
 	 * Method to retrieve the monthly fee depending on the account type
 	 * @return monthly fee
 	 */
+	@Override
 	public double monthlyFee() {
 		if (this.getBalance() >= WAIVE_AMOUNT) {
 			return 0.0;
