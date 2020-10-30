@@ -34,6 +34,13 @@ public class Checking extends Account{
 	}
 	
 	/**
+	 * Accessor method for boolean direct deposit.
+	 * @return direct deposit 
+	 */
+	public boolean getDirectDeposit() {
+		return this.directDeposit;
+	}
+	/**
 	 * Method from Account class to retrieve the monthly interest rate
 	 * @return monthly interest rate
 	 */

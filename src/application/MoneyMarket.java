@@ -34,6 +34,14 @@ public class MoneyMarket extends Account {
 	}
 	
 	/**
+	 * Accessor method for the number of withdrawals in money market.
+	 * @return number of withdrawals.
+	 */
+	public int getWithdrawals() {
+		return this.withdrawals;
+	}
+	
+	/**
 	 * Method to retrieve the monthly interest depending on the account type
 	 * @return monthly interest rate
 	 */

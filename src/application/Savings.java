@@ -33,6 +33,15 @@ public class Savings extends Account {
 		super(holder, balance, dateOpen);
 		this.isLoyal = isLoyal;
 	}
+	
+	/**
+	 * Accessor method for the isLoyal boolean.
+	 * @return isLoyal boolean value
+	 */
+	public boolean isLoyal() {
+		return this.isLoyal;
+	}
+	
 	/**
 	 * Method from Account class to retrieve the monthly interest rate
 	 * @return monthly interest rate

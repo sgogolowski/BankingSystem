@@ -36,6 +36,15 @@ public class AccountDatabase {
 		return size;
 	}
 	
+	
+	/**
+	 * Accessor method for the array of accounts.
+	 * @return reference to the array of accounts in the database.
+	 */
+	public Account[] getAccounts() {
+		return this.accounts;
+	}
+	
 	/**
 	 * find helper method to find the index of an account in the accounts array.
 	 * @param account is the account to look for in the accounts array
