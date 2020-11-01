@@ -89,11 +89,6 @@
                                           <Button mnemonicParsing="false" onAction="#openAccount" text="Open Account" />
                                        </children>
                                     </VBox>
-                                    <ImageView fitHeight="86.0" fitWidth="131.0" layoutX="258.0" layoutY="127.0" pickOnBounds="true">
-                                       <image>
-                                          <Image url="@../../img/opening-bank-account.jpg" />
-                                       </image>
-                                    </ImageView>
                                     <Button layoutX="389.0" layoutY="213.0" mnemonicParsing="false" onAction="#clearOpen" prefHeight="0.0" prefWidth="45.0" text="Clear" />
                                  </children>
                               </Pane>
@@ -153,11 +148,6 @@
                                           <Button mnemonicParsing="false" onAction="#closeAccount" text="Close Account" />
                                        </children>
                                     </VBox>
-                                    <ImageView fitHeight="86.0" fitWidth="131.0" layoutX="303.0" layoutY="71.0" pickOnBounds="true">
-                                       <image>
-                                          <Image url="@../../img/opening-bank-account.jpg" />
-                                       </image>
-                                    </ImageView>
                                     <Button layoutX="389.0" layoutY="211.0" mnemonicParsing="false" onAction="#clearClose" prefHeight="0.0" prefWidth="45.0" text="Clear" />
                                  </children>
                               </Pane>
@@ -229,11 +219,6 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <ImageView fitHeight="86.0" fitWidth="131.0" layoutX="303.0" layoutY="71.0" pickOnBounds="true">
-                                       <image>
-                                          <Image url="@../../img/opening-bank-account.jpg" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                               </Pane>
                               <Label layoutX="13.0" layoutY="230.0" text="Output">
@@ -261,11 +246,6 @@
                               <TextArea fx:id="databaseOutput" layoutX="13.0" layoutY="132.0" prefHeight="221.0" prefWidth="434.0" />
                               <Pane layoutX="13.0" layoutY="7.0" prefHeight="115.0" prefWidth="434.0">
                                  <children>
-                                    <ImageView fitHeight="86.0" fitWidth="131.0" layoutX="289.0" layoutY="14.0" pickOnBounds="true">
-                                       <image>
-                                          <Image url="@../../img/opening-bank-account.jpg" />
-                                       </image>
-                                    </ImageView>
                                     <HBox alignment="CENTER" layoutY="32.0" prefHeight="50.0" prefWidth="288.0" spacing="18.0">
                                        <children>
                                           <MenuButton fx:id="databaseMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Database">
