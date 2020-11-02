@@ -107,7 +107,7 @@ public class MainController {
 	    	String balance = balanceOpen.getText();
 	    	if (balance.equals(""))
 	    		throw new InputMismatchException("Missing input, try again.");
-	    	if (Double.valueOf(balance) < 0) 
+	    	if (Double.valueOf(balance) < 0.01) 
 	    		throw new NumberFormatException("Input mismatch, try again.");
 	    	double balance_amount = Double.valueOf(balance);
 	    	String month_input = month.getText();
@@ -244,7 +244,7 @@ public class MainController {
 	    	String balance = balanceDW.getText();
 	    	if (balance.equals(""))
 	    		throw new InputMismatchException("Missing input, try again.");
-	    	if (Double.valueOf(balance) < 0) 
+	    	if (Double.valueOf(balance) < 0.01) 
 	    		throw new NumberFormatException("Input mismatch, try again.");
 	    	double amount = Double.valueOf(balance);
 	    	
@@ -308,7 +308,7 @@ public class MainController {
 	    	String balance = balanceDW.getText();
 	    	if (balance.equals(""))
 	    		throw new InputMismatchException("Missing input, try again.");
-	    	if (Double.valueOf(balance) < 0) 
+	    	if (Double.valueOf(balance) < 0.01) 
 	    		throw new NumberFormatException("Input mismatch, try again.");
 	    	double amount = Double.valueOf(balance);
 	    	
