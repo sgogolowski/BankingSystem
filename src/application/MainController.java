@@ -504,7 +504,7 @@ public class MainController {
     @FXML
     void showPN(ActionEvent event) {
     	if (db.getSize() == 0)
-    		databaseOutput.appendText("Database is empty.");
+    		databaseOutput.appendText("Database is empty.\n");
     	else
     		databaseOutput.appendText(db.printByLastName());
     }
@@ -517,7 +517,7 @@ public class MainController {
     @FXML
     void showPD(ActionEvent event) {
     	if (db.getSize() == 0)
-    		databaseOutput.appendText("Database is empty.");
+    		databaseOutput.appendText("Database is empty.\n");
     	else
     		databaseOutput.appendText(db.printByDateOpen());
     }
