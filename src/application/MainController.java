@@ -121,36 +121,36 @@ public class MainController {
 	    	if (AccountTypeOpen.getSelectedToggle().equals(checkingRadioOpen)) {
 	    		boolean direct_deposit = DirectDepositCheckbox.isSelected();
 	    		if (db.add(new Checking(new Profile(first_name, last_name), balance_amount, date, direct_deposit)))
-	    			openOutput.setText(openOutput.getText() + "Account opened and added to the database.\n");
+	    			openOutput.appendText("Account opened and added to the database.\n");
 	    		else
-	    			openOutput.setText(openOutput.getText() + "Account is already in the database.\n");
+	    			openOutput.appendText("Account is already in the database.\n");
 	    	}
 	    	//savings account
 	    	else if (AccountTypeOpen.getSelectedToggle().equals(savingsRadioOpen)) {
 	    		boolean loyal = LoyalCheckbox.isSelected();
 	    		if (db.add(new Savings(new Profile(first_name, last_name), balance_amount, date, loyal)))
-	    			openOutput.setText(openOutput.getText() + "Account opened and added to the database.\n");
+	    			openOutput.appendText("Account opened and added to the database.\n");
 	    		else
-	    			openOutput.setText(openOutput.getText() + "Account is already in the database.\n");
+	    			openOutput.appendText("Account is already in the database.\n");
 	    	}
 	    	//moneymarket account
 	    	else if (AccountTypeOpen.getSelectedToggle().equals(moneymarketRadioOpen)) {
 	    		if (db.add(new MoneyMarket(new Profile(first_name, last_name), balance_amount, date, 0)))
-	    			openOutput.setText(openOutput.getText() + "Account opened and added to the database.\n");
+	    			openOutput.appendText("Account opened and added to the database.\n");
 	    		else
-	    			openOutput.setText(openOutput.getText() + "Account is already in the database.\n");
+	    			openOutput.appendText("Account is already in the database.\n");
 	    	}
 	    	
     	}
     	//error-handling
     	catch (NumberFormatException nfe) {
-    		openOutput.setText(openOutput.getText() + "Input mismatch.\n");		
+    		openOutput.appendText("Input mismatch.\n");		
     	}
     	catch (InputMismatchException ime) {
-    		openOutput.setText(openOutput.getText() + ime.getMessage() +"\n");
+    		openOutput.appendText(ime.getMessage() +"\n");
     	}
     	catch (NullPointerException npe) {
-    		openOutput.setText(openOutput.getText() + "Missing input, try again.\n");
+    		openOutput.appendText("Missing input, try again.\n");
     	}
     	finally {
     		//clear all inputs on the GUI
@@ -189,32 +189,32 @@ public class MainController {
 	    	//checking account
 	    	if (AccountTypeClose.getSelectedToggle().equals(checkingRadioClose)) {
 	    		if (db.remove(new Checking(new Profile(first_name, last_name), 0, null, true)))
-	    			closeOutput.setText(closeOutput.getText() + "Account closed and removed from the database.\n");
+	    			closeOutput.appendText("Account closed and removed from the database.\n");
 	    		else
-	    			closeOutput.setText(closeOutput.getText() + "Account does not exist.\n");
+	    			closeOutput.appendText("Account does not exist.\n");
 	    	}
 	    	//savings account
 	    	else if (AccountTypeClose.getSelectedToggle().equals(savingsRadioClose)) {
 	    		if (db.remove(new Savings(new Profile(first_name, last_name), 0, null, true)))
-	    			closeOutput.setText(closeOutput.getText() + "Account closed and removed from the database.\n");
+	    			closeOutput.appendText("Account closed and removed from the database.\n");
 	    		else
-	    			closeOutput.setText(closeOutput.getText() + "Account does not exist.\n");
+	    			closeOutput.appendText("Account does not exist.\n");
 	    	}
 	    	//moneymarket account
 	    	else if (AccountTypeClose.getSelectedToggle().equals(moneymarketRadioClose)) {
 	    		if (db.remove(new MoneyMarket(new Profile(first_name, last_name), 0, null, 0)))
-	    			closeOutput.setText(closeOutput.getText() + "Account closed and removed from the database.\n");
+	    			closeOutput.appendText("Account closed and removed from the database.\n");
 	    		else
-	    			closeOutput.setText(closeOutput.getText() + "Account does not exist.\n");
+	    			closeOutput.appendText("Account does not exist.\n");
 	    	}
 	  
     	}
     	//error-handling for missing inputs
     	catch (NullPointerException npe) {
-    		closeOutput.setText(closeOutput.getText() + "Missing input, try again.\n");
+    		closeOutput.appendText("Missing input, try again.\n");
     	}
     	catch (InputMismatchException ime) {
-    		closeOutput.setText(closeOutput.getText() + ime.getMessage() + "\n");
+    		closeOutput.appendText(ime.getMessage() + "\n");
     	}
     	finally {
     		//clear all inputs on the GUI
@@ -252,33 +252,33 @@ public class MainController {
 	    	//checking account
 	    	if (AccountTypeDW.getSelectedToggle().equals(checkingRadioDW))
 	    		if (db.deposit(new Checking(new Profile(first_name, last_name), 0, null, true), amount))
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + amount + " deposited to account.\n");
+	    			deposit_withdraw_output.appendText(amount + " deposited to account.\n");
 	    		else
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Account does not exist.\n");
+	    			deposit_withdraw_output.appendText("Account does not exist.\n");
 	    	//savings account
 	    	else if (AccountTypeDW.getSelectedToggle().equals(savingsRadioDW))
 	    		if (db.deposit(new Savings(new Profile(first_name, last_name), 0, null, true), amount))
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + amount + " deposited to account.\n");
+	    			deposit_withdraw_output.appendText(amount + " deposited to account.\n");
 	    		else
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Account does not exist.\n");
+	    			deposit_withdraw_output.appendText("Account does not exist.\n");
 	    	//moneymarket account
 	    	else if (AccountTypeDW.getSelectedToggle().equals(moneymarketRadioDW))
 	    		if (db.deposit(new MoneyMarket(new Profile(first_name, last_name), 0, null, 0), amount))
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + amount + " deposited to account.\n");
+	    			deposit_withdraw_output.appendText(amount + " deposited to account.\n");
 	    		else
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Account does not exist.\n");
+	    			deposit_withdraw_output.appendText("Account does not exist.\n");
 	    
 	
     	}
     	//error-handling
     	catch (NumberFormatException nfe) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Input data type mismatch.\n");
+    		deposit_withdraw_output.appendText("Input data type mismatch.\n");
     	}
     	catch (InputMismatchException ime) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + ime.getMessage() +"\n");
+    		deposit_withdraw_output.appendText(ime.getMessage() +"\n");
     	}
     	catch (NullPointerException npe) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Missing input, try again.\n");
+    		deposit_withdraw_output.appendText("Missing input, try again.\n");
     	}
     	finally {
     		//clear all inputs on the GUI
@@ -315,41 +315,41 @@ public class MainController {
 	    	//checking account
 	    	if (AccountTypeDW.getSelectedToggle().equals(checkingRadioDW)) {
 	    		if (db.withdrawal(new Checking(new Profile(first_name, last_name), 0, null, true), amount) == 0)
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + amount + " withdrawn from account.\n");
+	    			deposit_withdraw_output.appendText(amount + " withdrawn from account.\n");
 	    		else if (db.withdrawal(new Checking(new Profile(first_name, last_name), 0, null, true), amount) == 1)
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Insufficient funds.\n");
+	    			deposit_withdraw_output.appendText("Insufficient funds.\n");
 	    		else if (db.withdrawal(new Checking(new Profile(first_name, last_name), 0, null, true), amount) == -1)
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Account does not exist.\n");
+	    			deposit_withdraw_output.appendText("Account does not exist.\n");
 	    	}
 	    	//savings account
 	    	else if (AccountTypeDW.getSelectedToggle().equals(savingsRadioDW)) {
 	    		if (db.withdrawal(new Savings(new Profile(first_name, last_name), 0, null, true), amount) == 0)
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + amount + " withdrawn from account.\n");
+	    			deposit_withdraw_output.appendText(amount + " withdrawn from account.\n");
 	    		else if (db.withdrawal(new Savings(new Profile(first_name, last_name), 0, null, true), amount) == 1)
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Insufficient funds.\n");
+	    			deposit_withdraw_output.appendText("Insufficient funds.\n");
 	    		else if (db.withdrawal(new Savings(new Profile(first_name, last_name), 0, null, true), amount) == -1)
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Account does not exist.\n");
+	    			deposit_withdraw_output.appendText("Account does not exist.\n");
 	    	}
 	    	//moneymarket account
 	    	else if (AccountTypeDW.getSelectedToggle().equals(moneymarketRadioDW)) {
 	    		if (db.withdrawal(new MoneyMarket(new Profile(first_name, last_name), 0, null, 0), amount) == 0)
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + amount + " withdrawn from account.\n");
+	    			deposit_withdraw_output.appendText(amount + " withdrawn from account.\n");
 	    		else if (db.withdrawal(new MoneyMarket(new Profile(first_name, last_name), 0, null, 0), amount) == 1)
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Insufficient funds.\n");
+	    			deposit_withdraw_output.appendText("Insufficient funds.\n");
 	    		else if (db.withdrawal(new MoneyMarket(new Profile(first_name, last_name), 0, null, 0), amount) == -1)
-	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Account does not exist.\n");
+	    			deposit_withdraw_output.appendText("Account does not exist.\n");
 	    	}
 	
     	}
     	//error-handling
     	catch (NumberFormatException nfe) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Input data type mismatch.\n");
+    		deposit_withdraw_output.appendText("Input data type mismatch.\n");
     	}
     	catch (InputMismatchException ime) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + ime.getMessage() +"\n");
+    		deposit_withdraw_output.appendText(ime.getMessage() +"\n");
     	}
     	catch (NullPointerException npe) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Missing input, try again.\n");
+    		deposit_withdraw_output.appendText("Missing input, try again.\n");
     	}
     	finally {
     		//clear all inputs on the GUI
@@ -380,14 +380,15 @@ public class MainController {
 	    	if (selectedFile != null) {
 	    		Scanner fileReader = new Scanner(selectedFile);
 	    		if (!(fileReader.hasNextLine())) {
-	    			databaseOutput.setText(databaseOutput.getText() + selectedFile.getName() + " is empty.\n");
+	    			databaseOutput.appendText(selectedFile.getName() + " is empty.\n");
 	    			return;
 	    		}
 	    		while (fileReader.hasNextLine()) {
 	    			String line = fileReader.nextLine();
 	    			String[] parse = line.split(",");
 	    			if (parse.length != 6) {
-	    				databaseOutput.setText(databaseOutput.getText() + "Invalid data.\n");
+	    				databaseOutput.appendText("Invalid data.\n");
+	    				return;
 	    			}
 	    			else {
 		    			String fname = parse[1];
@@ -401,9 +402,9 @@ public class MainController {
 		    				else if (parse[5].toUpperCase().equals("FALSE"));
 		    					directDeposit = false;
 		    				if (db.add(new Checking(new Profile(fname, lname), balance, date, directDeposit))) 
-		    					databaseOutput.setText(databaseOutput.getText() + "Account opened and added to the database.\n");
+		    					databaseOutput.appendText("Account opened and added to the database.\n");
 		    				else
-		    					databaseOutput.setText(databaseOutput.getText() + "Account is already in the database.\n");
+		    					databaseOutput.appendText("Account is already in the database.\n");
 		    			}
 		    			else if (parse[0].equals("S")) {
 		    				boolean loyal;
@@ -412,25 +413,25 @@ public class MainController {
 		    				else if (parse[5].toUpperCase().equals("FALSE"));
 		    					loyal = false;
 		    				if (db.add(new Savings(new Profile(fname, lname), balance, date, loyal)))
-		    					databaseOutput.setText(databaseOutput.getText() + "Account opened and added to the database.\n");
+		    					databaseOutput.appendText("Account opened and added to the database.\n");
 		    				else
-		    					databaseOutput.setText(databaseOutput.getText() + "Account is already in the database.\n");
+		    					databaseOutput.appendText("Account is already in the database.\n");
 		    			}
 		    			else if (parse[0].equals("M")) {
 		    				int withdrawals = Integer.valueOf(parse[5]);
 		    				if (db.add(new MoneyMarket(new Profile(fname, lname), balance, date, withdrawals)))
-		    					databaseOutput.setText(databaseOutput.getText() + "Account opened and added to the database.\n");
+		    					databaseOutput.appendText("Account opened and added to the database.\n");
 		    				else
-		    					databaseOutput.setText(databaseOutput.getText() + "Account is already in the database.\n");
+		    					databaseOutput.appendText("Account is already in the database.\n");
 		    			}
 	    			}
 	    		}
 	    		fileReader.close();
 	    	}
-	    	databaseOutput.setText(databaseOutput.getText() + selectedFile.getName() + " was successfully imported.\n");
+	    	databaseOutput.appendText(selectedFile.getName() + " was successfully imported.\n");
     	}
     	catch (NullPointerException npe) {
-    		databaseOutput.setText("No file was selected, try again.\n");
+    		databaseOutput.appendText("No file was selected, try again.\n");
     	}
 	    	
 
@@ -484,11 +485,14 @@ public class MainController {
 	    			myWriter.write(accountType + "," + fname + "," + lname + "," + balance + "," + dateOpened + "," + uniqueField + "\n");
 	    		}
 	    	}
-	    	databaseOutput.setText(databaseOutput.getText() + "Database was successfully exported into " + selectedFile.getName() + ".\n");
+	    	databaseOutput.appendText("Database was successfully exported into " + selectedFile.getName() + ".\n");
 	    	myWriter.close();
     	}
     	catch (IOException ioe) {
-    		databaseOutput.setText(databaseOutput.getText() + "Unable to find file.\n");		
+    		databaseOutput.appendText("Unable to find file.\n");		
+    	}
+    	catch (NullPointerException npe) {
+    		databaseOutput.appendText("No file was selected, try again.\n");
     	}
     }
 
@@ -500,9 +504,9 @@ public class MainController {
     @FXML
     void showPN(ActionEvent event) {
     	if (db.getSize() == 0)
-    		databaseOutput.setText("Database is empty.");
+    		databaseOutput.appendText("Database is empty.");
     	else
-    		databaseOutput.setText(db.printByLastName());
+    		databaseOutput.appendText(db.printByLastName());
     }
     
     /**
@@ -513,9 +517,9 @@ public class MainController {
     @FXML
     void showPD(ActionEvent event) {
     	if (db.getSize() == 0)
-    		databaseOutput.setText("Database is empty.");
+    		databaseOutput.appendText("Database is empty.");
     	else
-    		databaseOutput.setText(db.printByDateOpen());
+    		databaseOutput.appendText(db.printByDateOpen());
     }
     
     /**
@@ -526,9 +530,9 @@ public class MainController {
     @FXML
     void printAccounts(ActionEvent event) {
     	if (db.getSize() == 0)
-    		databaseOutput.setText("Database is empty.\n");
+    		databaseOutput.appendText("Database is empty.\n");
     	else
-    		databaseOutput.setText(db.printAccounts());
+    		databaseOutput.appendText(db.printAccounts());
     }
     
     /**
