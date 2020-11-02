@@ -85,7 +85,6 @@
                                        <children>
                                           <CheckBox fx:id="DirectDepositCheckbox" mnemonicParsing="false" text="Direct Deposit" />
                                           <CheckBox fx:id="LoyalCheckbox" mnemonicParsing="false" text="Loyal Customer" />
-                                          <TextField fx:id="Withdrawals" promptText="Withdrawals" />
                                           <Button mnemonicParsing="false" onAction="#openAccount" text="Open Account" />
                                        </children>
                                     </VBox>

@@ -98,6 +98,7 @@ public class Date implements Comparable<Date> {
 			case NOV:
 				if (this.day > MAX_DAYS_2)
 					return false;
+				return true;
 			case FEB:
 				if (this.year % 4 == 0)
 					if (this.day > MAX_DAYS_LEAP_YEAR)

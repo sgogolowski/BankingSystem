@@ -232,7 +232,7 @@ public class AccountDatabase {
 	 */
 	public String printByLastName() {
 		String output;
-		output = String.format("\n--Printing statements by last name--\n");
+		output = "\n--Printing statements by last name--\n";
 		if (this.size >= 2)
 			sortByLastName();
 		for (int i = 0; i < this.size; i ++) {

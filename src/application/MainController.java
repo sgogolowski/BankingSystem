@@ -33,7 +33,7 @@ public class MainController {
     private TabPane tabPane;
 	
 	@FXML
-    private TextField month, year, fnameClose, balanceDW, day, Withdrawals, balanceOpen, lnameDW, fnameOpen, lnameOpen, lnameClose, fnameDW;
+    private TextField month, year, fnameClose, balanceDW, day, balanceOpen, lnameDW, fnameOpen, lnameOpen, lnameClose, fnameDW;
 
     @FXML
     private MenuItem exportMenu,importMenu, pnMenu, pdMenu, paMenu;
@@ -64,8 +64,6 @@ public class MainController {
     	DirectDepositCheckbox.setDisable(false);
     	LoyalCheckbox.setDisable(true);
     	LoyalCheckbox.setSelected(false);
-    	Withdrawals.setDisable(true);
-    	Withdrawals.setText("");
     }
     
     /**
@@ -77,8 +75,6 @@ public class MainController {
     	LoyalCheckbox.setDisable(false);
     	DirectDepositCheckbox.setDisable(true);
     	DirectDepositCheckbox.setSelected(false);
-    	Withdrawals.setDisable(true);
-    	Withdrawals.setText("");
     }
     
     /**
@@ -87,7 +83,6 @@ public class MainController {
      */
     @FXML
     void disableCS(ActionEvent event) {
-    	Withdrawals.setDisable(false);
     	DirectDepositCheckbox.setDisable(true);
     	DirectDepositCheckbox.setSelected(false);
     	LoyalCheckbox.setDisable(true);
@@ -107,9 +102,14 @@ public class MainController {
     		//get user input
 	    	String first_name = fnameOpen.getText();
 	    	String last_name = lnameOpen.getText();
-	    	double balance_amount = Double.valueOf(balanceOpen.getText());
-	    	if (balance_amount < 0)
+	    	if (first_name.equals("") || last_name.equals("") )
+	    		throw new InputMismatchException("Missing input, try again.");
+	    	String balance = balanceOpen.getText();
+	    	if (balance.equals(""))
+	    		throw new InputMismatchException("Missing input, try again.");
+	    	if (Double.valueOf(balance) < 0) 
 	    		throw new NumberFormatException("Input mismatch, try again.");
+	    	double balance_amount = Double.valueOf(balance);
 	    	String month_input = month.getText();
 	    	String day_input = day.getText();
 	    	String year_input = year.getText();
@@ -124,7 +124,6 @@ public class MainController {
 	    			openOutput.setText(openOutput.getText() + "Account opened and added to the database.\n");
 	    		else
 	    			openOutput.setText(openOutput.getText() + "Account is already in the database.\n");
-	    		System.out.println(db.printAccounts());
 	    	}
 	    	//savings account
 	    	else if (AccountTypeOpen.getSelectedToggle().equals(savingsRadioOpen)) {
@@ -136,14 +135,12 @@ public class MainController {
 	    	}
 	    	//moneymarket account
 	    	else if (AccountTypeOpen.getSelectedToggle().equals(moneymarketRadioOpen)) {
-	    		int num_withdrawals = Integer.valueOf(Withdrawals.getText());
-	    		if (num_withdrawals < 0)
-	    			throw new InputMismatchException();
-	    		if (db.add(new MoneyMarket(new Profile(first_name, last_name), balance_amount, date, num_withdrawals)))
+	    		if (db.add(new MoneyMarket(new Profile(first_name, last_name), balance_amount, date, 0)))
 	    			openOutput.setText(openOutput.getText() + "Account opened and added to the database.\n");
 	    		else
 	    			openOutput.setText(openOutput.getText() + "Account is already in the database.\n");
 	    	}
+	    	
     	}
     	//error-handling
     	catch (NumberFormatException nfe) {
@@ -153,25 +150,25 @@ public class MainController {
     		openOutput.setText(openOutput.getText() + ime.getMessage() +"\n");
     	}
     	catch (NullPointerException npe) {
-    		openOutput.setText(openOutput.getText() + "Input mismatch.\n");
+    		openOutput.setText(openOutput.getText() + "Missing input, try again.\n");
     	}
-    	//clear all inputs on the GUI
     	finally {
+    		//clear all inputs on the GUI
     		fnameOpen.setText("");
     		lnameOpen.setText("");
     		balanceOpen.setText("");
     		month.setText("");
     		day.setText("");
     		year.setText("");
-    		AccountTypeOpen.getSelectedToggle().setSelected(false);
+    		if (AccountTypeOpen.getSelectedToggle() != null)
+    			AccountTypeOpen.getSelectedToggle().setSelected(false);
     		DirectDepositCheckbox.setDisable(false);
     		LoyalCheckbox.setDisable(false);
-    		Withdrawals.setDisable(false);
     		DirectDepositCheckbox.setSelected(false);
     		LoyalCheckbox.setSelected(false);
-    		Withdrawals.setText("");
     		
     	}
+    	
     
     }
 
@@ -187,6 +184,8 @@ public class MainController {
     		//get user input
 	    	String first_name = fnameClose.getText();
 	    	String last_name = lnameClose.getText();
+	    	if (first_name.equals("") || last_name.equals("") )
+	    		throw new InputMismatchException("Missing input, try again.");
 	    	//checking account
 	    	if (AccountTypeClose.getSelectedToggle().equals(checkingRadioClose)) {
 	    		if (db.remove(new Checking(new Profile(first_name, last_name), 0, null, true)))
@@ -208,17 +207,22 @@ public class MainController {
 	    		else
 	    			closeOutput.setText(closeOutput.getText() + "Account does not exist.\n");
 	    	}
-	    	
+	  
     	}
     	//error-handling for missing inputs
     	catch (NullPointerException npe) {
     		closeOutput.setText(closeOutput.getText() + "Missing input, try again.\n");
     	}
-    	//clear user input
-    	finally {		
+    	catch (InputMismatchException ime) {
+    		closeOutput.setText(closeOutput.getText() + ime.getMessage() + "\n");
+    	}
+    	finally {
+    		//clear all inputs on the GUI
     		fnameClose.setText("");
     		lnameClose.setText("");
-    		AccountTypeClose.getSelectedToggle().setSelected(false);
+    		if (AccountTypeClose.getSelectedToggle() != null)
+    			AccountTypeClose.getSelectedToggle().setSelected(false);
+    		
     	}
     	
     }
@@ -233,11 +237,17 @@ public class MainController {
     void deposit(ActionEvent event) throws IOException, NullPointerException {
     	try {
     		//get user input
-	    	double amount = Double.valueOf(balanceDW.getText());
-	    	if (amount < 0)
-	    		throw new InputMismatchException("Input data type mismatch.");
-	    	String first_name = fnameDW.getText();
+    		String first_name = fnameDW.getText();
 	    	String last_name = lnameDW.getText();
+	    	if (first_name.equals("") || last_name.equals("") )
+	    		throw new InputMismatchException("Missing input, try again.");
+	    	String balance = balanceDW.getText();
+	    	if (balance.equals(""))
+	    		throw new InputMismatchException("Missing input, try again.");
+	    	if (Double.valueOf(balance) < 0) 
+	    		throw new NumberFormatException("Input mismatch, try again.");
+	    	double amount = Double.valueOf(balance);
+	    	
 	    	
 	    	//checking account
 	    	if (AccountTypeDW.getSelectedToggle().equals(checkingRadioDW))
@@ -257,7 +267,7 @@ public class MainController {
 	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + amount + " deposited to account.\n");
 	    		else
 	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Account does not exist.\n");
-	    	
+	    
 	
     	}
     	//error-handling
@@ -265,17 +275,19 @@ public class MainController {
     		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Input data type mismatch.\n");
     	}
     	catch (InputMismatchException ime) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Input data type mismatch.\n");
+    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + ime.getMessage() +"\n");
     	}
     	catch (NullPointerException npe) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Missing input.\n");
+    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Missing input, try again.\n");
     	}
-    	//clear user input
-    	finally{
+    	finally {
+    		//clear all inputs on the GUI
     		fnameDW.setText("");
     		lnameDW.setText("");
     		balanceDW.setText("");
-    		AccountTypeDW.getSelectedToggle().setSelected(false);
+    		if (AccountTypeDW.getSelectedToggle() != null)
+    			AccountTypeDW.getSelectedToggle().setSelected(false);
+    		
     	}
     }
     
@@ -289,11 +301,17 @@ public class MainController {
     void withdraw(ActionEvent event) {
     	try {
     		//get user input
-	    	double amount = Double.valueOf(balanceDW.getText());
-	    	if (amount < 0)
-	    		throw new InputMismatchException("Input data type mismatch.");
-	    	String first_name = fnameDW.getText();
+    		String first_name = fnameDW.getText();
 	    	String last_name = lnameDW.getText();
+	    	if (first_name.equals("") || last_name.equals("") )
+	    		throw new InputMismatchException("Missing input, try again.");
+	    	String balance = balanceDW.getText();
+	    	if (balance.equals(""))
+	    		throw new InputMismatchException("Missing input, try again.");
+	    	if (Double.valueOf(balance) < 0) 
+	    		throw new NumberFormatException("Input mismatch, try again.");
+	    	double amount = Double.valueOf(balance);
+	    	
 	    	//checking account
 	    	if (AccountTypeDW.getSelectedToggle().equals(checkingRadioDW)) {
 	    		if (db.withdrawal(new Checking(new Profile(first_name, last_name), 0, null, true), amount) == 0)
@@ -321,7 +339,6 @@ public class MainController {
 	    		else if (db.withdrawal(new MoneyMarket(new Profile(first_name, last_name), 0, null, 0), amount) == -1)
 	    			deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Account does not exist.\n");
 	    	}
-	    	
 	
     	}
     	//error-handling
@@ -329,18 +346,21 @@ public class MainController {
     		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Input data type mismatch.\n");
     	}
     	catch (InputMismatchException ime) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Input data type mismatch.\n");
+    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + ime.getMessage() +"\n");
     	}
     	catch (NullPointerException npe) {
-    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Missing input.\n");
+    		deposit_withdraw_output.setText(deposit_withdraw_output.getText() + "Missing input, try again.\n");
     	}
-    	//clear user input
-    	finally{
+    	finally {
+    		//clear all inputs on the GUI
     		fnameDW.setText("");
     		lnameDW.setText("");
     		balanceDW.setText("");
-    		AccountTypeDW.getSelectedToggle().setSelected(false);
+    		if (AccountTypeDW.getSelectedToggle() != null)
+    			AccountTypeDW.getSelectedToggle().setSelected(false);
+    		
     	}
+
     }
     
 
@@ -359,41 +379,50 @@ public class MainController {
 	    	File selectedFile = fc.showOpenDialog(window);
 	    	if (selectedFile != null) {
 	    		Scanner fileReader = new Scanner(selectedFile);
+	    		if (!(fileReader.hasNextLine())) {
+	    			databaseOutput.setText(databaseOutput.getText() + selectedFile.getName() + " is empty.\n");
+	    			return;
+	    		}
 	    		while (fileReader.hasNextLine()) {
 	    			String line = fileReader.nextLine();
 	    			String[] parse = line.split(",");
-	    			String fname = parse[1];
-	    			String lname = parse[2];
-	    			double balance = Double.valueOf(parse[3]);
-	    			Date date = parseDate(parse[4]);
-	    			if (parse[0].equals("C")) {
-	    				boolean directDeposit;
-	    				if (parse[5].toUpperCase().equals("TRUE"))
-	    					directDeposit = true;
-	    				else if (parse[5].toUpperCase().equals("FALSE"));
-	    					directDeposit = false;
-	    				if (db.add(new Checking(new Profile(fname, lname), balance, date, directDeposit))) 
-	    					databaseOutput.setText(databaseOutput.getText() + "Account opened and added to the database.\n");
-	    				else
-	    					databaseOutput.setText(databaseOutput.getText() + "Account is already in the database.\n");
+	    			if (parse.length != 6) {
+	    				databaseOutput.setText(databaseOutput.getText() + "Invalid data.\n");
 	    			}
-	    			else if (parse[0].equals("S")) {
-	    				boolean loyal;
-	    				if (parse[5].toUpperCase().equals("TRUE"))
-	    					loyal = true;
-	    				else if (parse[5].toUpperCase().equals("FALSE"));
-	    					loyal = false;
-	    				if (db.add(new Savings(new Profile(fname, lname), balance, date, loyal)))
-	    					databaseOutput.setText(databaseOutput.getText() + "Account opened and added to the database.\n");
-	    				else
-	    					databaseOutput.setText(databaseOutput.getText() + "Account is already in the database.\n");
-	    			}
-	    			else if (parse[0].equals("M")) {
-	    				int withdrawals = Integer.valueOf(parse[5]);
-	    				if (db.add(new MoneyMarket(new Profile(fname, lname), balance, date, withdrawals)))
-	    					databaseOutput.setText(databaseOutput.getText() + "Account opened and added to the database.\n");
-	    				else
-	    					databaseOutput.setText(databaseOutput.getText() + "Account is already in the database.\n");
+	    			else {
+		    			String fname = parse[1];
+		    			String lname = parse[2];
+		    			double balance = Double.valueOf(parse[3]);
+		    			Date date = parseDate(parse[4]);
+		    			if (parse[0].equals("C")) {
+		    				boolean directDeposit;
+		    				if (parse[5].toUpperCase().equals("TRUE"))
+		    					directDeposit = true;
+		    				else if (parse[5].toUpperCase().equals("FALSE"));
+		    					directDeposit = false;
+		    				if (db.add(new Checking(new Profile(fname, lname), balance, date, directDeposit))) 
+		    					databaseOutput.setText(databaseOutput.getText() + "Account opened and added to the database.\n");
+		    				else
+		    					databaseOutput.setText(databaseOutput.getText() + "Account is already in the database.\n");
+		    			}
+		    			else if (parse[0].equals("S")) {
+		    				boolean loyal;
+		    				if (parse[5].toUpperCase().equals("TRUE"))
+		    					loyal = true;
+		    				else if (parse[5].toUpperCase().equals("FALSE"));
+		    					loyal = false;
+		    				if (db.add(new Savings(new Profile(fname, lname), balance, date, loyal)))
+		    					databaseOutput.setText(databaseOutput.getText() + "Account opened and added to the database.\n");
+		    				else
+		    					databaseOutput.setText(databaseOutput.getText() + "Account is already in the database.\n");
+		    			}
+		    			else if (parse[0].equals("M")) {
+		    				int withdrawals = Integer.valueOf(parse[5]);
+		    				if (db.add(new MoneyMarket(new Profile(fname, lname), balance, date, withdrawals)))
+		    					databaseOutput.setText(databaseOutput.getText() + "Account opened and added to the database.\n");
+		    				else
+		    					databaseOutput.setText(databaseOutput.getText() + "Account is already in the database.\n");
+		    			}
 	    			}
 	    		}
 	    		fileReader.close();
@@ -407,7 +436,11 @@ public class MainController {
 
     		
     }
-
+    /**
+     * export database event handler to print all the accounts into a text file specified by the user. 
+     * Prints the accounts in the format accountType,fname,lname,balance,dateOpened,unique value for each account
+     * @param event being fired
+     */
     @FXML
     void exportDB(ActionEvent event) throws IOException{
     	try {
@@ -417,41 +450,38 @@ public class MainController {
 	    	fc.getExtensionFilters().add(new ExtensionFilter("Text Files", "*.txt"));
 	    	Window window = tabPane.getScene().getWindow();
 	    	File selectedFile = fc.showSaveDialog(window);
+	    	//file writer to the text file
 	    	FileWriter myWriter = new FileWriter(selectedFile);
-	    	int counter = 1;
+	    	//make sure a file was selected
 	    	if (selectedFile != null) {
 	    		Account[] accounts = db.getAccounts();
-	    		
+	    		//loop through the array of accounts in the database
 	    		for (Account ac : accounts) {
 	    			if (ac == null) {
 	    				break;
 	    			}
-	    			System.out.println(counter);
-	    			System.out.println(ac.getClass());
+	    			//get account type and its unique field
 	    			if (ac instanceof Checking) {
-	    				//System.out.println("1");
 	    				accountType = "C";
 	    				uniqueField = String.valueOf(((Checking) ac).getDirectDeposit());
 	    			}
 	    			else if (ac instanceof Savings) {
-	    				//System.out.println("2");
 	    				accountType = "S";
 	    				uniqueField = String.valueOf(((Savings) ac).isLoyal());
 	    			}
 	    			else if (ac instanceof MoneyMarket) {
-	    				//System.out.println("3");
 	    				accountType = "M";
 	    				uniqueField = String.valueOf(((MoneyMarket) ac).getWithdrawals());
 	    			}
 	    			else
 	    				throw new InputMismatchException();
+	    			//get fname, lname, balance, and date opened
 	    			fname = ac.getHolder().getFname();
 	    			lname = ac.getHolder().getLname();
 	    			balance = String.valueOf(ac.getBalance());
 	    			dateOpened  = ac.getDateOpen().toString();
-	    			
+	    			//write to file
 	    			myWriter.write(accountType + "," + fname + "," + lname + "," + balance + "," + dateOpened + "," + uniqueField + "\n");
-	    			counter++;
 	    		}
 	    	}
 	    	databaseOutput.setText(databaseOutput.getText() + "Database was successfully exported into " + selectedFile.getName() + ".\n");
@@ -496,31 +526,52 @@ public class MainController {
     @FXML
     void printAccounts(ActionEvent event) {
     	if (db.getSize() == 0)
-    		databaseOutput.setText("Database is empty.");
+    		databaseOutput.setText("Database is empty.\n");
     	else
     		databaseOutput.setText(db.printAccounts());
     }
     
+    /**
+     * Event handler to clear the text area in the Deposit/Withdraw tab
+     * @param event being fired
+     */
     @FXML
     void clearDW(ActionEvent event) {
     	deposit_withdraw_output.setText("");
     }
     
+    /**
+     * Event handler to clear the text area in the Close Account tab
+     * @param event being fired
+     */
     @FXML
     void clearClose(ActionEvent event) {
     	closeOutput.setText("");
     }
     
+    /**
+     * Event handler to clear the text area in the Open Account tab
+     * @param event being fired
+     */
     @FXML
     void clearOpen(ActionEvent event) {
     	openOutput.setText("");
     }
     
+    /**
+     * Event handler to clear the text area in the Account Database tab
+     * @param event being fired
+     */
     @FXML
     void clearDatabase(ActionEvent event) {
     	databaseOutput.setText("");
     }
     
+    /**
+     * Helper method to help parse String of a date in the format "mm/dd/yyyy" into a Date object.
+     * @param input is the String object of the date
+     * @return Date instance of the input
+     */
     private Date parseDate(String input) {
 		String[] dateTokens = input.split("/");
 		if(dateTokens == null || dateTokens.length != 3)
